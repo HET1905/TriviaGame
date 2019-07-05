@@ -1,5 +1,80 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
 body{
     /* background: #ccc; */
     background: #ccc url("../images/back.jpg") no-repeat;
     background-size: cover;
+    font-family: 'Viga', sans-serif;
+    font-size: 1em;
+}
+/* ------------------------Main Conatiner Styling---------------------- */
+#container{
+    width: 80%;
+    height: 500px;
+    margin:auto auto;
+    margin-top:5%;
+    border:2px solid #000;
+    box-shadow: -2px 3px 9px #000;
+    text-align: center;
+    padding: 5px;
+    background: rgba(44, 76, 165, 0.5);
+    border-radius: 20px;
+}
+/* --------------------------Header Styling--------------------- */
+header h1{
+    width: 100%;
+    font-size: 3.5em;
+    font-family: 'Righteous', cursive;
+    letter-spacing: 2px;
+}
+/* ----------------Button styles--------------------------- */
+#btnDiv{
+    width: 50%;
+    margin:auto auto;
+}
+#btnStart{
+    width:70%;
+    height: 80px;
+    border: 2px solid #000;
+    border-radius: 5px;
+    background:rgb(1, 33, 63);
+    color:#fff;
+    font-size: 2em;
+    letter-spacing: 2px;
+    margin-top: 20%;
+}
+#btnStart:hover{
+    cursor: pointer;
+    background: #000;
+    color: #fff;
+    padding:10px;
+
+}
+/* -------------------------dynamicDiv Styling-------------------------- */
+#dynamicDiv{
+    width:80%;
+    margin-top:30px;
+    margin:auto auto;
+}
+#dynamicDiv h2{
+    display: inline-block;
+    margin-right: 10px;
+}
+#dynamicDiv span{
+    font-size: 1.5em;
+}
+#dynamicDiv li{
+    list-style: none;
+}
+#dynamicDiv li:hover{
+    cursor: pointer;
+    padding:5px;
+    background: #ccc;
+
+}
+#dynamicDiv #nope{
+    display: block;
 }
