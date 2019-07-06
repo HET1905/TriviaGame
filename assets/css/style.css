@@ -57,6 +57,7 @@ header h1{
 #dynamicDiv{
     width:80%;
     margin-top:30px;
+    padding-top: 30px;
     margin:auto auto;
 }
 #dynamicDiv h2{
@@ -68,6 +69,8 @@ header h1{
 }
 #dynamicDiv li{
     list-style: none;
+    width: 50%;
+    margin:auto auto;
 }
 #dynamicDiv li:hover{
     cursor: pointer;
@@ -77,4 +80,42 @@ header h1{
 }
 #dynamicDiv #nope{
     display: block;
+}
+#ulDynamic{
+    margin-top: 20px;
+}
+.listDynamic{
+    /* margin-top: 10px; */
+    padding:5px;
+}
+#quesHeadingId{
+    margin-top: 10px;
+}
+#correctAnswerP{
+    margin-top: 10px;
+}
+#btnRestart{
+    width:30%;
+    height: 80px;
+    border: 2px solid #000;
+    border-radius: 5px;
+    background:rgb(1, 33, 63);
+    color:#fff;
+    font-size: 2em;
+    letter-spacing: 2px;
+    margin-top: 20px;
+}
+#btnRestart:hover{
+    cursor: pointer;
+    background: #000;
+    color: #fff;
+    padding:5px;
+
+}
+#ansImg{
+    width:200px;
+    height: 200px;
+    border:2px solid #000;
+    margin-top: 10px;
+    box-shadow: 2px 3px 4px #000;
 }
