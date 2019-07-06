@@ -62,7 +62,7 @@ $(document).ready(function () {
             // alert("Game Over");
             $("#dynamicDiv").empty();
             // $("#dynamicDiv").append(timingLabel,timerText);
-            $("#dynamicDiv").append("<h2>All done, heres hows you did!");
+            $("#dynamicDiv").append("<h2>All done, heres how you did!");
             $("#dynamicDiv").append("<ul id=ulDynamic><li class=listDynamic> Correc Answers : " + numCorrectAns + "</li>");
             $("#dynamicDiv").append("<li class=listDynamic> Incorrect Answers : " + numWrongAns + "</li>");
             $("#dynamicDiv").append("<li class=listDynamic> Unanswered : " + numUnattended + "</li></ul>");
@@ -71,11 +71,17 @@ $(document).ready(function () {
     }
 
     $("#dynamicDiv").on("click", "#btnRestart", function () {
-        alert("From restart");
-        var num = 0;
-        var numCorrectAns = 0;
-        var numWrongAns = 0;
-        var numUnattended = 0;
+        // alert("From restart");
+     num = 0;
+         numCorrectAns = 0;
+         numWrongAns = 0;
+         numUnattended = 0;
+         timerFlag = false;
+         time = 11;
+         timerText = $("<span>");
+         timingLabel = $("<h2>");
+        // var img = "<img>"
+        // var intervalId;
         $("#dynamicDiv").empty();
         createDynamicElements();
 
