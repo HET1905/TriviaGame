@@ -1,5 +1,8 @@
-var num=0;
+var num = 0;
 var correctAns;
+var numCorrectAns=0;
+var numWrongAns=0;
+var numUnattended=0;
 var quseAnsObj = {
     "ques1": {
         "q": " By what name was William F. Cody better known?",
@@ -7,36 +10,62 @@ var quseAnsObj = {
     },
     "ques2": {
         "q": "What is the capital city of Peru?",
-        "a": ["Swiden", "Sidney", "Barzil", "Lima"]
+        "a": ["Swiden", "Sydney", "Barzil", "Lima"]
+    },
+    "ques3":{
+        "q":"Which fictional city is the home of Batman?",
+        "a":["Duckberg","Gotham City","Metropolis","Central City"]
+    },
+    "ques4":{
+        "q": "Spinach is high in which mineral?",
+        "a":["Calcium","Potassium","Iron","Zinc"]
+    },
+    "ques5":{
+        "q": "Which crime-fighting cartoon dog has the initals “S.D.” on his collar?",
+        "a":["Goofy","Scooby Doo","Pluto","Underdog"]
     }
+
 }
 var rightAnsObj = {
     "ques1": "Buffalo Bill",
-    "ques2": "Lima"
+    "ques2": "Lima",
+    "ques3":"Gotham City",
+    "ques4":"Iron",
+    "ques5":"Scooby Doo"
+
 }
 
 
 $(document).ready(function () {
     var timerFlag = false;
-    var time = 0;
+    var time = 11;
     var timerText = $("<span>");
     var timingLabel = $("<h2>");
     var intervalId;
 
     function createDynamicElements() {
         num++;
-        timingLabel.append("Timming Remaining : ");
-        counter();
-
-        $("#dynamicDiv").append(timingLabel, timerText);
-        printQuestion(num);
-        $("#ulDynamic").trigger("click");
+        if (num < 6) {
+            timingLabel.append("Timming Remaining : ");
+            counter();
+            $("#dynamicDiv").append(timingLabel, timerText);
+            printQuestion(num);
+            $("#ulDynamic").trigger("click");
+        } else {
+            // alert("Game Over");
+            $("#dynamicDiv").empty();
+            // $("#dynamicDiv").append(timingLabel,timerText);
+            $("#dynamicDiv").append("<h2>All done, heres hows you did!");
+            $("#dynamicDiv").append("<ul><li> Correc Answers : " + numCorrectAns + "</li>");
+            $("#dynamicDiv").append("<li> Incorrect Answers : " + numWrongAns + "</li>");
+            $("#dynamicDiv").append("<li> Unanswered : " + numUnattended + "</li></ul>");
+        }
     }
 
     function counter() {
         if (!timerFlag) {
-             intervalId = setInterval(function () {
-                time++;
+            intervalId = setInterval(function () {
+                time--;
                 timerText.text(time + " Seconds");
                 checkTimer();
             }, 1000);
@@ -46,13 +75,9 @@ $(document).ready(function () {
     }
 
     function checkTimer() {
-        if (time === 10 || correctAns == "") {
-            // alert("time over");
-            time = 0;
-            // alert("I will give you right Answer");
+        if (time === 0 || correctAns == "") {
             correctAnswerDiv(num);
-            num++;
-            // printQuestion(num);
+            time = 11;
         }
     }
 
@@ -66,8 +91,20 @@ $(document).ready(function () {
         if (num == 2) {
             $("#dynamicDiv").append("<h3 id=quesHeadingId>" + quseAnsObj.ques2.q + "</h3> ")
             printAnswer(num);
-
         }
+        if (num == 3) {
+            $("#dynamicDiv").append("<h3 id=quesHeadingId>" + quseAnsObj.ques3.q + "</h3> ")
+            printAnswer(num);
+        }
+        if (num == 4) {
+            $("#dynamicDiv").append("<h3 id=quesHeadingId>" + quseAnsObj.ques4.q + "</h3> ")
+            printAnswer(num);
+        }
+        if (num == 5) {
+            $("#dynamicDiv").append("<h3 id=quesHeadingId>" + quseAnsObj.ques5.q + "</h3> ")
+            printAnswer(num);
+        }
+
 
 
     }
@@ -75,7 +112,7 @@ $(document).ready(function () {
 
     function printAnswer(qNo) {
         $("#dynamicDiv").append("<ul id='ulDynamic' class='ulDynamic'></ul>");
-        var ques = "ques" + num;
+        var ques = "ques" + qNo;
 
         for (var i = 0; i < 4; i++) {
             var liValue = quseAnsObj[ques].a[i];
@@ -95,48 +132,91 @@ $(document).ready(function () {
 
     }
 
-    function correctAnswerDiv(num) {
-        var quesNo = "ques" + num;
-        $("#dynamicDiv").append("<h2 id=nope >Nope ! </h2>");
-        $("#dynamicDiv").append("<p id=correctAnswerP>The Correct answer is : " + rightAnsObj[quesNo] + "</p>") ;
-        $("#quesHeadingId").remove();
-        $("#ulDynamic").remove();
-        clearInterval(intervalId);
-        timerFlag=false;
-    }
 
     function checkAnswer(num) {
         var quesNo = "ques" + num;
         if (correctAns === rightAnsObj[quesNo]) {
             alert("Right Answer !!!");
+            numCorrectAns++;
             $("#quesHeadingId").remove();
             $("#ulDynamic").remove();
-            clearInterval(intervalId);
-            timerFlag=false
-            time=0;
-            createDynamicElements();
-        } else {
-            alert("Wrong Answer");
-            correctAnswerDiv(num);
-            emptyDynamicDivId = setTimeout(function(){
+           
+            $("#dynamicDiv").append("<h2 id=nope >Correct !!! </h2>");
+            $("#dynamicDiv").append("<p id=correctAnswerP> Answer is : " + rightAnsObj[quesNo] + "</p>");
+
+            emptyDynamicDivId = setTimeout(function () {
                 $("#nope").remove();
                 $("#correctAnswerP").remove();
-            },1000)
-            createDynamicDivIntId = setTimeout(createDynamicElements,1000);
+            }, 2000);
+            var setTimeOut1 = setTimeout(createDynamicElements, 3000);
+
+            clearInterval(intervalId);
+            timerFlag = false
+            time = 11;
+            timingLabel.text("");
+            timerText.text("");
+            // createDynamicElements();
+        } else {
+            alert("Wrong Answer");
+            // numWrongAns++;
+            correctAnswerDiv(num);
+            time=11;
+            // emptyDynamicDivId = setTimeout(function(){
+            //     $("#nope").remove();
+            //     $("#correctAnswerP").remove();
+            // },2000)
+            // createDynamicDivIntId = setTimeout(createDynamicElements(),2000);
             // createDynamicElements();
         }
     }
 
+    function correctAnswerDiv(num) {
+        var quesNo = "ques" + num;
+        if (time === 0) {
+            numUnattended++;
+            $("#quesHeadingId").remove();
+            $("#ulDynamic").remove();
+            $("#dynamicDiv").append("<h2 id=nope >Running Out of time ! </h2>");
+            $("#dynamicDiv").append("<p id=correctAnswerP>The Correct answer is : " + rightAnsObj[quesNo] + "</p>");
 
-    // num = 1;
-    // printQuestion(num)
-    // $("#ulDynamic").trigger("click");
+            timingLabel.text("");
+            timerText.text("");
+            clearInterval(intervalId);
 
-    $("#btnStart").click(function () {
-        $("#btnDiv").hide();
-        createDynamicElements();
+            timerFlag = false;
+            emptyDynamicDivId = setTimeout(function () {
+                $("#nope").remove();
+                $("#correctAnswerP").remove();
+            }, 2000);
+            var setTimeOut1 = setTimeout(createDynamicElements, 3000);
+        } else {
+            numWrongAns++;
+            $("#quesHeadingId").remove();
+            $("#ulDynamic").remove();
+            $("#dynamicDiv").append("<h2 id=nope >Nope ! </h2>");
+            $("#dynamicDiv").append("<p id=correctAnswerP>The Correct answer is : " + rightAnsObj[quesNo] + "</p>");
 
-    });
+            timingLabel.text("");
+            timerText.text("");
+            clearInterval(intervalId);
+            timerFlag = false;
+               emptyDynamicDivId = setTimeout(function () {
+                $("#nope").remove();
+                $("#correctAnswerP").remove();
+            }, 2000);
+            var setTimeOut1 = setTimeout(createDynamicElements, 3000);
+        }
+
+    }
+
+
+
+
+$("#btnStart").click(function () {
+    $("#btnDiv").hide();
+    createDynamicElements();
+
+});
 
 
 });
