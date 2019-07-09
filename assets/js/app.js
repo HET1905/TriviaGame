@@ -46,6 +46,7 @@ $(document).ready(function () {
     var time = 11;
     var timerText = $("<span>");
     var timingLabel = $("<h2>");
+    var totalQestion = 0;
     // var img = "<img>"
     var intervalId;
 
@@ -57,6 +58,7 @@ $(document).ready(function () {
             counter();
             $("#dynamicDiv").append(timingLabel, timerText);
             printQuestion(num);
+            
             $("#ulDynamic").trigger("click");
         } else {
             // alert("Game Over");
