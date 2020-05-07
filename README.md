@@ -1,5 +1,6 @@
 ## Trivia Game 
  This game is a quiz on general knowledge questions, don't be serious it's funny too..
+ https://het1905.github.io/TriviaGame/
 
 ## Technology used
 
